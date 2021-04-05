@@ -2,7 +2,6 @@ const express = require("express")
 const router = new express.Router()
 const User = require("../models/user")
 const auth = require("../middleware/auth")
-const multer = require("multer")
 const sharp = require("sharp")
 const {sendWelcomeEmail, sendCancelEmail} = require("../emails/account")
 
@@ -23,19 +22,19 @@ router.delete("/users/me", auth,  async (req, res) => {
 })
 
 //set up multer
-const upload = multer({
-    limits: {
-        fileSize: 1000000
-    },
-    fileFilter(req, file, cb) {
-        if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
-            return cb(new Error("Please upload an image"))
-        }
+// const upload = multer({
+//     limits: {
+//         fileSize: 1000000
+//     },
+//     fileFilter(req, file, cb) {
+//         if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+//             return cb(new Error("Please upload an image"))
+//         }
 
-        cb(undefined, true)
-    }
+//         cb(undefined, true)
+//     }
 
-})
+// })
 //avatar related content
 
 router.delete("/users/me/avatar", auth, async (req, res) => {
